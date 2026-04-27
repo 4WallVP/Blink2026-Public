@@ -44,22 +44,76 @@
       border-radius: 18px;
       padding: 24px;
     }
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
     }
-    li + li {
-      border-top: 1px solid var(--line);
-    }
-    a {
+    .card {
       display: block;
-      padding: 16px 4px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #101015;
       color: var(--text);
       text-decoration: none;
-      font-size: 1.05rem;
+      transition: transform 120ms ease, border-color 120ms ease;
     }
-    a:hover {
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: #4a4a57;
+    }
+    .thumb-wrap {
+      aspect-ratio: 16 / 9;
+      background: #0a0a0c;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .thumb-empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .card-body {
+      padding: 16px 16px 18px;
+    }
+    .meta-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid #32323a;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+    }
+    .empty {
+      color: var(--muted);
+      padding: 4px;
+    }
+    .card:hover h2 {
       color: var(--accent);
     }
   </style>
@@ -69,29 +123,155 @@
     <h1>Blink 2026</h1>
     <p>Public projector study exports</p>
     <section class="panel">
-      <ul>
-      <li><a href="exports/html/american-building.html">American Building</a></li>
-      <li><a href="exports/html/aronoff.html">Aronoff</a></li>
-      <li><a href="exports/html/birds-mural.html">Birds Mural</a></li>
-      <li><a href="exports/html/church-wall.html">Church Wall</a></li>
-      <li><a href="exports/html/coffee-shop.html">Coffee Shop</a></li>
-      <li><a href="exports/html/covenant-first-church.html">Covenant First Church</a></li>
-      <li><a href="exports/html/haile-foundation.html">Haile Foundation</a></li>
-      <li><a href="exports/html/hannaford.html">Hannaford</a></li>
-      <li><a href="exports/html/hotel-covington.html">Hotel Covington</a></li>
-      <li><a href="exports/html/interactive-stage-1.html">Interactive Stage 1</a></li>
-      <li><a href="exports/html/interactive-stage-2.html">Interactive Stage 2</a></li>
-      <li><a href="exports/html/madison-theater.html">Madison Theater</a></li>
-      <li><a href="exports/html/micro-building.html">Micro Building</a></li>
-      <li><a href="exports/html/mother-of-god.html">Mother Of God</a></li>
-      <li><a href="exports/html/natalia-rak-mural.html">Natalia Rak Mural</a></li>
-      <li><a href="exports/html/neil-armstrong.html">Neil Armstrong</a></li>
-      <li><a href="exports/html/payphone-mural.html">Payphone Mural</a></li>
-      <li><a href="exports/html/royal-dog-mural.html">Royal Dog Mural</a></li>
-      <li><a href="exports/html/scpa.html">Scpa</a></li>
-      <li><a href="exports/html/vince-fraser.html">Vince Fraser</a></li>
-      <li><a href="exports/html/ywca.html">Ywca</a></li>
-      </ul>
+      <div class="grid">
+      <a class="card" href="exports/html/american-building.html">
+              <div class="thumb-wrap"><img src="images/american-building/coverage.png" alt="American Building coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 2.3</span><span class="meta-chip">Version 1</span></div>
+                <h2>American Building</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/aronoff.html">
+              <div class="thumb-wrap"><img src="images/aronoff/coverage.png" alt="Aronoff coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 3.12</span><span class="meta-chip">Version 2</span></div>
+                <h2>Aronoff</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/birds-mural.html">
+              <div class="thumb-wrap"><img src="images/birds-mural/coverage.png" alt="Birds Mural coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 3.5</span><span class="meta-chip">Version 1</span></div>
+                <h2>Birds Mural</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/church-wall.html">
+              <div class="thumb-wrap"><img src="images/church-wall/coverage.png" alt="Church Wall coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 3.3</span><span class="meta-chip">Version 1</span></div>
+                <h2>Church Wall</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/coffee-shop.html">
+              <div class="thumb-wrap"><img src="images/coffee-shop/coverage.png" alt="Coffee Shop - Scott St. coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 5.6</span></div>
+                <h2>Coffee Shop - Scott St.</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/covenant-first-church.html">
+              <div class="thumb-wrap thumb-empty"><span>No coverage preview</span></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 3.8</span><span class="meta-chip">Version 1</span></div>
+                <h2>Covenant First Church</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/haile-foundation.html">
+              <div class="thumb-wrap"><img src="images/haile-foundation/coverage.png" alt="Haile Foundation coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 5.5</span><span class="meta-chip">Version 1</span></div>
+                <h2>Haile Foundation</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/hannaford.html">
+              <div class="thumb-wrap"><img src="images/hannaford/coverage.png" alt="Hannaford coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 5.2</span><span class="meta-chip">Version 1</span></div>
+                <h2>Hannaford</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/hotel-covington.html">
+              <div class="thumb-wrap"><img src="images/hotel-covington/coverage.png" alt="Hotel Covington coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 5.3</span><span class="meta-chip">Version 1</span></div>
+                <h2>Hotel Covington</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/interactive-stage-1.html">
+              <div class="thumb-wrap"><img src="images/interactive-stage-1/coverage.png" alt="Interactive Stage #1 coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 3.1</span><span class="meta-chip">Version 1</span></div>
+                <h2>Interactive Stage #1</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/interactive-stage-2.html">
+              <div class="thumb-wrap"><img src="images/interactive-stage-2/coverage.png" alt="Interactive Stage #2 coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 3.2</span><span class="meta-chip">Version 1</span></div>
+                <h2>Interactive Stage #2</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/madison-theater.html">
+              <div class="thumb-wrap"><img src="images/madison-theater/coverage.png" alt="Madison Theater coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 5.4</span><span class="meta-chip">Version 1</span></div>
+                <h2>Madison Theater</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/micro-building.html">
+              <div class="thumb-wrap"><img src="images/micro-building/coverage.png" alt="Micro Building coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 5.7</span><span class="meta-chip">Version 1</span></div>
+                <h2>Micro Building</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/mother-of-god.html">
+              <div class="thumb-wrap"><img src="images/mother-of-god/coverage.png" alt="Mother Of God coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 5.1</span><span class="meta-chip">Version 1</span></div>
+                <h2>Mother Of God</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/natalia-rak-mural.html">
+              <div class="thumb-wrap"><img src="images/natalia-rak-mural/coverage.png" alt="Natalia Rak Mural coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 1.2</span><span class="meta-chip">Version 1</span></div>
+                <h2>Natalia Rak Mural</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/neil-armstrong.html">
+              <div class="thumb-wrap thumb-empty"><span>No coverage preview</span></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 3.7</span><span class="meta-chip">Version 1</span></div>
+                <h2>Neil Armstrong Mural</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/payphone-mural.html">
+              <div class="thumb-wrap"><img src="images/payphone-mural/coverage.png" alt="Payphone Mural coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 1.3</span><span class="meta-chip">Version 1</span></div>
+                <h2>Payphone Mural</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/royal-dog-mural.html">
+              <div class="thumb-wrap"><img src="images/royal-dog-mural/left-coverage.png" alt="Royal Dog Mural coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 1.1</span><span class="meta-chip">Version 2</span></div>
+                <h2>Royal Dog Mural</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/scpa.html">
+              <div class="thumb-wrap"><img src="images/scpa/coverage.png" alt="SCPA coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 2.4</span><span class="meta-chip">Version 1</span></div>
+                <h2>SCPA</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/vince-fraser.html">
+              <div class="thumb-wrap"><img src="images/vince-fraser/coverage.png" alt="Vince Fraser coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 3.11</span><span class="meta-chip">Version 1</span></div>
+                <h2>Vince Fraser</h2>
+              </div>
+            </a>
+      <a class="card" href="exports/html/ywca.html">
+              <div class="thumb-wrap"><img src="images/ywca/coverage.png" alt="YWCA coverage preview"></div>
+              <div class="card-body">
+                <div class="meta-row"><span class="meta-chip">Site 3.4</span><span class="meta-chip">Version 1</span></div>
+                <h2>YWCA</h2>
+              </div>
+            </a>
+      </div>
     </section>
   </main>
 </body>
