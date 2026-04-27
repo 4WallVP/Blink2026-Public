@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="only light">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Madison Theater — Projector Study</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background-color: #111; color-scheme: only light; }
+    body {
+      font-family: 'Roboto', -apple-system, sans-serif;
+      padding: 28px 20px 80px;
+      line-height: 1.5; -webkit-font-smoothing: antialiased;
+    }
+    .page {
+      width: 8.5in; margin: 0 auto;
+      background: #0d0d0d; border: 5px solid #003a75;
+      border-radius: 10px; overflow: hidden; padding: 32px 40px 48px;
+    }
+    /* Page break rules — apply to both screen and print so PDF respects them */
+    .pj-card, .equip-chip, .shift-row, .image-block, .pj-first-group { page-break-inside: avoid; break-inside: avoid; }
+    .card-header, .sub-label { page-break-after: avoid; break-after: avoid; }
+    table { page-break-inside: auto; }
+    thead { display: table-header-group; }
+    tr { page-break-inside: avoid; break-inside: avoid; }
+
+    /* ── HEADER ── */
+    .job-header {
+      background: linear-gradient(160deg, #004fa3 0%, #003070 45%, #001840 100%);
+      border-radius: 10px; padding: 18px 84px 16px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .header-logo {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      height: 62px; width: auto; max-width: 216px;
+      object-fit: contain; object-position: center; opacity: 0.5;
+    }
+    .header-logo-left  { left: 20px; height: 107px; max-width: 373px; object-position: left center; }
+    .header-logo-right { right: 20px; height: 129px; max-width: 450px; object-position: right center; }
+    .header-meta-top {
+      font-family: 'Roboto Mono', monospace; font-size: 11px;
+      letter-spacing: 2px; color: rgba(255,255,255,0.4);
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .header-site-name {
+      font-family: 'Bebas Neue', sans-serif; font-size: 46px;
+      letter-spacing: 4px; color: white; line-height: 1;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .header-doc-type {
+      font-family: 'Bebas Neue', sans-serif; font-size: 18px;
+      letter-spacing: 7px; color: rgba(255,255,255,0.45);
+      margin-top: 2px; margin-bottom: 12px;
+    }
+    .header-meta-bottom {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; flex-wrap: wrap;
+    }
+    .header-meta-text { font-size: 12px; color: rgba(255,255,255,0.45); }
+    .meta-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.18); }
+    .status-pill {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; border-radius: 20px; padding: 3px 12px;
+    }
+    .status-in_review   { background: rgba(255,193,7,0.18); color: #ffd54f; border: 1px solid rgba(255,193,7,0.3); }
+    .status-done        { background: rgba(0,200,83,0.15);  color: #69f0ae; border: 1px solid rgba(0,200,83,0.3); }
+    .status-in_progress { background: rgba(33,150,243,0.2); color: #64b5f6; border: 1px solid rgba(33,150,243,0.3); }
+    .status-not_started { background: rgba(255,255,255,0.06); color: #666;  border: 1px solid rgba(255,255,255,0.1); }
+    .status-on_hold     { background: rgba(255,152,0,0.18); color: #ffb74d; border: 1px solid rgba(255,152,0,0.3); }
+    .status-needs_updates { background: rgba(244,67,54,0.18); color: #ef9a9a; border: 1px solid rgba(244,67,54,0.3); }
+
+    /* ── CARDS ── */
+    .card {
+      background: #141414; border: 1px solid #1e1e1e;
+      border-radius: 10px; margin-top: 18px; overflow: hidden;
+    }
+    .card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 20px; border-left: 3px solid #005eb8;
+      background: #191919; border-bottom: 1px solid #1e1e1e;
+    }
+    .card-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 4px; color: white; }
+    .card-link {
+      font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.35);
+      text-decoration: none; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px; padding: 3px 10px; transition: all 0.15s;
+    }
+    .card-link:hover { color: white; border-color: #005eb8; }
+    .card-body { padding: 20px; }
+
+    /* ── SUB-LABELS ── */
+    .sub-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: white;
+      margin: 20px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #252525;
+    }
+    .sub-label::after { display: none; }
+    .sub-label:first-child { margin-top: 0; }
+
+    /* ── TABLES ── */
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1.5px; background: #005eb8;
+      color: rgba(255,255,255,0.8); padding: 9px 12px; text-align: left;
+    }
+    thead th:first-child { border-radius: 6px 0 0 0; }
+    thead th:last-child  { border-radius: 0 6px 0 0; }
+    tbody td {
+      font-size: 13px; color: white; padding: 8px 12px; text-align: left;
+      border-bottom: 1px solid #1a1a1a; background: #181818;
+    }
+    tbody tr:nth-child(even) td { background: #161616; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:last-child td:first-child { border-radius: 0 0 0 6px; }
+    tbody tr:last-child td:last-child  { border-radius: 0 0 6px 0; }
+    .td-label {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; color: #ccc; background: #131313 !important;
+      white-space: nowrap; width: 38%;
+    }
+    .td-mono { font-family: 'Roboto Mono', monospace; font-size: 12px; color: white; }
+    .td-strong { color: white; font-weight: 600; }
+    .td-bleed { font-family: 'Roboto Mono', monospace; font-size: 12px; color: #4dabf7; }
+
+    /* ── INFO GRID ── */
+    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
+
+    /* ── EQUIPMENT CHIPS ── */
+    .equip-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .equip-chip {
+      background: linear-gradient(135deg, #004488, #0062cc);
+      border-radius: 8px; padding: 10px 16px;
+      display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 130px;
+    }
+    .equip-chip-label { font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+    .equip-chip-qty { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; color: white; line-height: 1; }
+    .equip-chip-name { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.75); }
+
+    /* ── IMAGE PLACEHOLDERS ── */
+    .img-ph {
+      border-radius: 6px; overflow: hidden;
+      background: repeating-linear-gradient(-45deg, #161616, #161616 5px, #111 5px, #111 12px);
+      border: 1px solid #1c1c1c;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 6px; aspect-ratio: 1 / 1;
+    }
+    .img-ph.wide { aspect-ratio: 16 / 9; }
+    .img-ph.heatmap { aspect-ratio: 2 / 1; }
+    .img-ph-icon { font-size: 18px; opacity: 0.18; }
+    .img-ph-label {
+      font-family: 'Roboto Mono', monospace; font-size: 9px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: #2e2e2e; text-align: center; padding: 0 16px;
+    }
+    .img-ph-filename { font-family: 'Roboto Mono', monospace; font-size: 8px; color: #222; }
+    .img-grid { display: grid; gap: 10px; }
+    .img-grid-1 { grid-template-columns: 1fr; }
+    .img-grid-2 { grid-template-columns: 1fr 1fr; }
+    .img-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .img-grid img {
+      width: 100%; height: auto; max-height: 4in;
+      object-fit: contain; border-radius: 6px; display: block;
+    }
+    .img-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .img-trio .img-item { display: flex; flex-direction: column; min-width: 0; }
+    .img-trio .sub-label { margin-top: 0; }
+    .img-trio img {
+      width: 100%; height: auto; max-height: 2.6in;
+      object-fit: contain; border-radius: 6px; display: block;
+    }
+
+    /* ── PROJECTOR CARDS ── */
+    .pj-list { display: flex; flex-direction: column; gap: 8px; }
+    .pj-card { border-radius: 8px; overflow: hidden; border: 1px solid #222; }
+    .pj-header { background: #005eb8; display: flex; align-items: center; gap: 14px; padding: 10px 16px; }
+    .pj-id { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; color: white; line-height: 1; }
+    .pj-model-lens { font-size: 12px; color: rgba(255,255,255,0.65); font-weight: 500; }
+    .pj-tags { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+    .pj-tag {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.5px; padding: 2px 9px;
+      border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7);
+    }
+    .pj-body { display: grid; grid-template-columns: 1fr 1fr 1.4fr; background: #181818; }
+    .pj-col { padding: 14px 16px; border-right: 1px solid #1e1e1e; }
+    .pj-col:last-child { border-right: none; }
+    .pj-col-title {
+      font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #252525;
+    }
+    .pj-row { display: flex; flex-direction: column; margin-bottom: 10px; gap: 2px; }
+    .pj-row-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.4); white-space: nowrap; }
+    .pj-row-val { font-size: 14px; color: white; font-weight: 500; }
+    .pj-row-val.mono { font-family: 'Roboto Mono', monospace; font-size: 12px; }
+    .pj-row-val.focus-low { color: #ffd54f; font-size: 12px; font-weight: 600; }
+
+    /* ── LENS SHIFT — GAUGE ── */
+    .shift-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px; }
+    .shift-row:last-child { margin-bottom: 0; }
+    .shift-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+    .shift-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.4); }
+    .shift-track {
+      height: 10px; border-radius: 5px; position: relative;
+      /* Stops --p1..--p4 are set inline per-row so asymmetric lenses
+         (e.g. -100/+130) get gradient zones aligned to each side's
+         physical limit instead of a fixed symmetric scale. */
+      --p1: 12.5%; --p2: 25%; --p3: 75%; --p4: 87.5%;
+      background: linear-gradient(to right,
+        #6d0000 0%, #c62828 var(--p1),
+        #e65100 var(--p1), #ef6c00 var(--p2),
+        #1b5e20 var(--p2), #2e7d32 var(--p3),
+        #ef6c00 var(--p3), #e65100 var(--p4),
+        #c62828 var(--p4), #6d0000 100%
+      );
+    }
+    /* zero tick — positioned per-row via inline style on .shift-zero */
+    .shift-zero {
+      position: absolute; top: -3px; bottom: -3px;
+      width: 1px; background: rgba(255,255,255,0.25); transform: translateX(-50%); z-index: 2;
+    }
+    /* position marker */
+    .shift-marker {
+      position: absolute; top: -4px; bottom: -4px; width: 3px;
+      background: white; transform: translateX(-50%);
+      border-radius: 2px; z-index: 3;
+      box-shadow: 0 0 6px rgba(0,0,0,1), 0 0 2px rgba(255,255,255,0.5);
+    }
+    .shift-scale {
+      position: relative; height: 10px;
+      font-family: 'Roboto Mono', monospace; font-size: 8px;
+      color: rgba(255,255,255,0.25);
+    }
+    .shift-scale-lo { position: absolute; left: 0; }
+    .shift-scale-hi { position: absolute; right: 0; }
+    .shift-scale-zero { position: absolute; transform: translateX(-50%); }
+    .shift-value {
+      font-size: 13px; font-weight: 600; color: white;
+      font-family: 'Roboto Mono', monospace; flex-shrink: 0;
+    }
+
+    /* ── VERSION CARDS ── */
+    .version-card {
+      background: #181818; border: 1px solid #1e1e1e;
+      border-left: 3px solid #005eb8;
+      border-radius: 6px; padding: 14px 18px; margin-bottom: 10px;
+    }
+    .version-card:last-child { margin-bottom: 0; }
+    .version-head {
+      display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+    .version-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 18px;
+      letter-spacing: 2px; color: white;
+    }
+    .version-date { font-family: 'Roboto Mono', monospace; font-size: 12px; color: rgba(255,255,255,0.45); }
+    .version-author { margin-left: auto; font-size: 12px; font-style: italic; color: rgba(255,255,255,0.55); }
+    .version-notes { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.45; }
+
+    /* ── NOTES / VERSION ── */
+    .surface-notes {
+      font-size: 13px; color: #2e2e2e; font-style: italic;
+      padding: 14px 16px; border: 1px dashed #1a1a1a; border-radius: 6px;
+    }
+    .empty-state {
+      font-size: 13px; color: #2e2e2e; font-style: italic;
+      text-align: center; padding: 24px; border: 1px dashed #1e1e1e; border-radius: 6px;
+    }
+
+    /* ── PRINT ── */
+    @page { size: letter; margin: 0.4in; }
+    @media print {
+      html, body { background: white !important; padding: 0; margin: 0; color: #111; }
+      .page { border: none; border-radius: 0; background: white !important; width: 100%; padding: 0; margin: 0; overflow: visible; }
+      .job-header, .equip-chip, .pj-header, thead th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      /* Cards */
+      .card { border: none; background: white !important; page-break-inside: avoid; }
+      .card-header { background: white !important; border-bottom: 1px solid #c8c8c8; border-left: none; padding-left: 0; }
+      .card-title { color: #003a75; }
+      .card-body { padding-left: 0; padding-right: 0; }
+
+      /* Projector card frame (screen default has a dark #222 border) */
+      .pj-card { border: 1px solid #c8c8c8 !important; }
+
+      /* Tables */
+      tbody td { color: #222; background: white !important; border-bottom-color: #e4e4e4; }
+      tbody tr:nth-child(even) td { background: #f7f7f7 !important; }
+      .td-label { color: #555; background: #eee !important; font-weight: 600; }
+      .td-bleed { color: #003a75 !important; }
+      .td-strong { color: #111 !important; }
+      .td-mono { color: #222 !important; }
+
+      /* Projector cards */
+      .pj-body { background: white; }
+      .pj-col { border-right: 1px solid #e4e4e4; }
+      .pj-col-title { color: #003a75; border-bottom: 1px solid #c8c8c8; font-weight: 700; }
+      .pj-row-label { color: #666; font-weight: 600; }
+      .pj-row-val { color: #111; }
+      .pj-tag { color: #444; border-color: #999; }
+
+      /* Sub-labels */
+      .sub-label { color: #003a75; border-bottom: 1px solid #c8c8c8; font-weight: 700; }
+
+      /* Lens shift gauge */
+      .shift-label { color: #666; font-weight: 600; }
+      .shift-track {
+        background: linear-gradient(to right,
+          #b71c1c 0%, #b71c1c var(--p1),
+          #ef6c00 var(--p1), #ef6c00 var(--p2),
+          #cfcfcf var(--p2), #cfcfcf var(--p3),
+          #ef6c00 var(--p3), #ef6c00 var(--p4),
+          #b71c1c var(--p4), #b71c1c 100%) !important;
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+      .shift-marker { background: #111 !important; box-shadow: none !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .shift-scale { color: #111; }
+      .shift-value { color: #111; }
+
+      /* Version cards */
+      .version-card { background: #f7f7f7 !important; border: 1px solid #e2e2e2; border-left: 3px solid #003a75; }
+      .version-title { color: #003a75; }
+      .version-date { color: #666; }
+      .version-author { color: #555; }
+      .version-notes { color: #222; }
+
+      /* Image placeholders / empty states */
+      .img-ph { background: #f4f4f4 !important; border-color: #d8d8d8; }
+      .img-ph-label { color: #888; } .img-ph-filename { color: #aaa; }
+      .surface-notes, .empty-state { color: #888; border-color: #d0d0d0; }
+      .card-link { display: none; }
+
+      /* Compact print layout — fit more per page */
+      .card { margin-top: 10px; }
+      .surface-card { page-break-before: always; margin-top: 0; }
+      .card-header { padding: 6px 0; }
+      .card-title { font-size: 16px; letter-spacing: 3px; }
+      .card-body { padding: 8px 0 4px; }
+      .sub-label { margin: 10px 0 6px; font-size: 9px; padding-bottom: 4px; }
+      .job-header { padding: 12px 72px 10px; }
+      .header-site-name { font-size: 34px; }
+      .header-doc-type { font-size: 14px; margin-bottom: 6px; }
+      .header-logo { height: 50px; max-width: 180px; }
+      .header-logo-left  { left: 14px; height: 86px; max-width: 311px; }
+      .header-logo-right { right: 14px; height: 104px; max-width: 374px; }
+
+      /* Image size caps — never stretch, letterbox instead */
+      .img-grid img { max-height: 2.8in; max-width: 100%; object-fit: contain; margin: 0 auto; }
+      .img-ph { max-height: 2.8in; }
+      .layout-img { max-height: 5.5in !important; }
+
+      /* Projector cards — tighter */
+      .pj-card { margin-bottom: 4px; }
+      .pj-header { padding: 6px 12px; }
+      .pj-id { font-size: 20px; }
+      .pj-model-lens { font-size: 11px; }
+      .pj-col { padding: 8px 10px; }
+      .pj-col-title { margin-bottom: 6px; padding-bottom: 4px; font-size: 8px; letter-spacing: 2px; }
+      .pj-row { margin-bottom: 4px; gap: 0; }
+      .pj-row-label { font-size: 8px; }
+      .pj-row-val { font-size: 12px; }
+      .pj-row-val.mono { font-size: 11px; }
+      .shift-row { margin-bottom: 8px; }
+      .shift-row:last-child { margin-bottom: 0; }
+      .shift-label { font-size: 8px; }
+      .shift-value { font-size: 11px; }
+      .shift-scale { font-size: 7px; }
+
+      /* Equipment chips — tighter */
+      .equip-chip { padding: 6px 12px; min-width: 110px; }
+      .equip-chip-label { font-size: 8px; }
+      .equip-chip-qty { font-size: 22px; }
+      .equip-chip-name { font-size: 11px; }
+
+      /* Tables */
+      thead th { padding: 6px 10px; font-size: 9px; }
+      tbody td { padding: 5px 10px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+
+
+
+<div class="page">
+
+  <div class="job-header">
+    <img class="header-logo header-logo-left" src="../../assets/BlinkEye.png" alt="Blink">
+    <img class="header-logo header-logo-right" src="../../assets/4Wall_Logo_White.png" alt="4Wall">
+    <div class="header-meta-top">Blink 2026 &nbsp;·&nbsp; Site 5.4</div>
+    <div class="header-site-name">Madison Theater</div>
+    <div class="header-doc-type">Projector Study</div>
+    <div class="header-meta-bottom"><span class="header-meta-text">04/27/2026</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Overview</span>
+    </div>
+    <div class="card-body">
+      
+
+      <div class="sub-label">Equipment</div>
+      <div class="equip-row" style="margin-bottom:18px;">
+        
+        <div class="equip-chip">
+          <span class="equip-chip-label">Projector</span>
+          <span class="equip-chip-qty">×2</span>
+          <span class="equip-chip-name">Epson Pro L1755U</span>
+        </div>
+        
+        <div class="equip-chip">
+          <span class="equip-chip-label">Lens</span>
+          <span class="equip-chip-qty">×2</span>
+          <span class="equip-chip-name">ELPLU04</span>
+        </div>
+        
+        <div class="equip-chip">
+          <span class="equip-chip-label">Server</span>
+          <span class="equip-chip-qty" style="font-size:22px;line-height:1.3;">GX1</span>
+          <span class="equip-chip-name"></span>
+        </div>
+        
+      </div>
+
+      
+    </div>
+  </div>
+
+  
+  <div class="card surface-card">
+    <div class="card-header"><span class="card-title"></span></div>
+    <div class="card-body">
+      <div class="sub-label">Dimensions</div>
+      <div class="info-grid">
+        <table>
+          <thead><tr><th colspan="2">Building</th></tr></thead>
+          <tbody>
+            <tr><td class="td-label">Width</td><td>53&#39;-0&#34;</td></tr>
+            <tr><td class="td-label">Height</td><td>44&#39;-0&#34;</td></tr>
+            <tr><td class="td-label">From Ground</td><td>9&#39;-0&#34;</td></tr>
+          </tbody>
+        </table>
+        <table>
+          <thead><tr><th colspan="2">Coverage</th></tr></thead>
+          <tbody>
+            <tr><td class="td-label">Width</td><td>53&#39;-0&#34;</td></tr>
+            <tr><td class="td-label">Height</td><td>35&#39;-0&#34;</td></tr>
+            <tr><td class="td-label">Avg Luminance</td><td>11 fc</td></tr>
+          </tbody>
+        </table>
+        <table>
+          <thead><tr><th colspan="2">Resolution</th></tr></thead>
+          <tbody>
+            <tr><td class="td-label">Resolution</td><td class="td-bleed">1632 × 1078 px</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      
+      <div class="image-block">
+        <div class="img-trio">
+          
+          <div class="img-item">
+            <div class="sub-label">Rough Coverage</div>
+            <img src="../_thumbs/madison-theater/coverage.jpg" alt="Rough Coverage">
+          </div>
+          
+          
+          <div class="img-item">
+            <div class="sub-label">Overlap Zones</div>
+            <img src="../_thumbs/madison-theater/overlap.jpg" alt="Overlap Zones">
+          </div>
+          
+          
+          <div class="img-item">
+            <div class="sub-label">Luminance Heatmap</div>
+            <img src="../_thumbs/madison-theater/heatmap.jpg" alt="Luminance Heatmap">
+          </div>
+          
+        </div>
+      </div>
+      
+
+      
+      <div class="sub-label">Delivery</div>
+      <div class="img-grid img-grid-3">
+        <img src="../_thumbs/madison-theater/clean.jpg" alt="Clean">
+        <img src="../_thumbs/madison-theater/grid.jpg" alt="Grid">
+        <img src="../_thumbs/madison-theater/composite.jpg" alt="Composite">
+      </div>
+      
+
+      
+      <div class="pj-list">
+        
+        <div class="pj-first-group">
+        <div class="sub-label" style="margin-top:22px;">Projectors</div>
+        
+        
+<div class="pj-card">
+  <div class="pj-header">
+    <div><div class="pj-id">PJ 5.4.1</div><div class="pj-model-lens">Epson Pro L1755U · ELPLU04</div></div>
+  </div>
+  <div class="pj-body">
+    <div class="pj-col">
+      <div class="pj-col-title">Placement</div>
+      
+      
+      <div class="pj-row"><span class="pj-row-label">Lens to Ground</span><span class="pj-row-val mono">15&#39;-0&#34;</span></div>
+      <div class="pj-row"><span class="pj-row-label">Throw Distance</span><span class="pj-row-val mono">60&#39;-0&#34;</span></div>
+      <div class="pj-row"><span class="pj-row-label">Angle</span><span class="pj-row-val mono">10.5°</span></div>
+      <div class="pj-row"><span class="pj-row-label">Focus</span><span class="pj-row-val">Full surface</span></div>
+    </div>
+    <div class="pj-col">
+      <div class="pj-col-title">Optics</div>
+      
+      <div class="shift-row">
+        <div class="shift-top">
+          <span class="shift-label">Est. Throw Ratio</span>
+          <span class="shift-value">0.77 : 1</span>
+        </div>
+        <div class="shift-track" style="--p1:10%; --p2:25%; --p3:75%; --p4:90%;">
+          <div class="shift-marker" style="left:100.0%;"></div>
+        </div>
+        <div class="shift-scale">
+          <span class="shift-scale-lo">0.64</span>
+          <span class="shift-scale-hi">0.77</span>
+        </div>
+      </div>
+      
+      <div class="pj-row"><span class="pj-row-label">Resolution</span><span class="pj-row-val mono">1920x1200</span></div>
+    </div>
+    <div class="pj-col">
+      <div class="pj-col-title">Lens Shift</div>
+      
+      <div class="shift-row">
+        <div class="shift-top">
+          <span class="shift-label">Vertical</span>
+          <span class="shift-value">0%</span>
+        </div>
+        <div class="shift-track" style="--p1:12.5%; --p2:25.0%; --p3:75.0%; --p4:87.5%;">
+          <div class="shift-zero" style="left:50.0%;"></div>
+          <div class="shift-marker" style="left:50.0%;"></div>
+        </div>
+        <div class="shift-scale">
+          <span class="shift-scale-lo">-60%</span>
+          <span class="shift-scale-zero" style="left:50.0%;">0</span>
+          <span class="shift-scale-hi">+60%</span>
+        </div>
+      </div>
+      
+      <div class="shift-row">
+        <div class="shift-top">
+          <span class="shift-label">Horizontal</span>
+          <span class="shift-value">0%</span>
+        </div>
+        <div class="shift-track" style="--p1:12.5%; --p2:25.0%; --p3:75.0%; --p4:87.5%;">
+          <div class="shift-zero" style="left:50.0%;"></div>
+          <div class="shift-marker" style="left:50.0%;"></div>
+        </div>
+        <div class="shift-scale">
+          <span class="shift-scale-lo">-18%</span>
+          <span class="shift-scale-zero" style="left:50.0%;">0</span>
+          <span class="shift-scale-hi">+18%</span>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+        </div>
+        
+        
+        
+<div class="pj-card">
+  <div class="pj-header">
+    <div><div class="pj-id">PJ 5.4.2</div><div class="pj-model-lens">Epson Pro L1755U · ELPLU04</div></div>
+  </div>
+  <div class="pj-body">
+    <div class="pj-col">
+      <div class="pj-col-title">Placement</div>
+      
+      
+      <div class="pj-row"><span class="pj-row-label">Lens to Ground</span><span class="pj-row-val mono">15&#39;-0&#34;</span></div>
+      <div class="pj-row"><span class="pj-row-label">Throw Distance</span><span class="pj-row-val mono">60&#39;-0&#34;</span></div>
+      <div class="pj-row"><span class="pj-row-label">Angle</span><span class="pj-row-val mono">10.5°</span></div>
+      <div class="pj-row"><span class="pj-row-label">Focus</span><span class="pj-row-val">Full surface</span></div>
+    </div>
+    <div class="pj-col">
+      <div class="pj-col-title">Optics</div>
+      
+      <div class="shift-row">
+        <div class="shift-top">
+          <span class="shift-label">Est. Throw Ratio</span>
+          <span class="shift-value">0.77 : 1</span>
+        </div>
+        <div class="shift-track" style="--p1:10%; --p2:25%; --p3:75%; --p4:90%;">
+          <div class="shift-marker" style="left:100.0%;"></div>
+        </div>
+        <div class="shift-scale">
+          <span class="shift-scale-lo">0.64</span>
+          <span class="shift-scale-hi">0.77</span>
+        </div>
+      </div>
+      
+      <div class="pj-row"><span class="pj-row-label">Resolution</span><span class="pj-row-val mono">1920x1200</span></div>
+    </div>
+    <div class="pj-col">
+      <div class="pj-col-title">Lens Shift</div>
+      
+      <div class="shift-row">
+        <div class="shift-top">
+          <span class="shift-label">Vertical</span>
+          <span class="shift-value">0%</span>
+        </div>
+        <div class="shift-track" style="--p1:12.5%; --p2:25.0%; --p3:75.0%; --p4:87.5%;">
+          <div class="shift-zero" style="left:50.0%;"></div>
+          <div class="shift-marker" style="left:50.0%;"></div>
+        </div>
+        <div class="shift-scale">
+          <span class="shift-scale-lo">-60%</span>
+          <span class="shift-scale-zero" style="left:50.0%;">0</span>
+          <span class="shift-scale-hi">+60%</span>
+        </div>
+      </div>
+      
+      <div class="shift-row">
+        <div class="shift-top">
+          <span class="shift-label">Horizontal</span>
+          <span class="shift-value">0%</span>
+        </div>
+        <div class="shift-track" style="--p1:12.5%; --p2:25.0%; --p3:75.0%; --p4:87.5%;">
+          <div class="shift-zero" style="left:50.0%;"></div>
+          <div class="shift-marker" style="left:50.0%;"></div>
+        </div>
+        <div class="shift-scale">
+          <span class="shift-scale-lo">-18%</span>
+          <span class="shift-scale-zero" style="left:50.0%;">0</span>
+          <span class="shift-scale-hi">+18%</span>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+        
+        
+      </div>
+      
+
+      
+    </div>
+  </div>
+  
+
+  
+
+  
+
+  
+  <div class="card">
+    <div class="card-header"><span class="card-title">Version History</span></div>
+    <div class="card-body"><div class="version-card">  <div class="version-head">    <span class="version-title">Version 1</span>    <span class="version-date">04/27/2026</span>    <span class="version-author">Cheyenne Doczi</span>  </div>  </div></div>
+  </div>
+  
+
+</div>
+</body>
+</html>
