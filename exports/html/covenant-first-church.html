@@ -32,12 +32,15 @@
       border-radius: 10px; padding: 18px 28px 16px;
       text-align: center; position: relative; overflow: hidden;
     }
-    .header-top {
+    .header-row {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 24px;
+      gap: 24px;
+    }
+    .header-text {
+      flex: 1 1 auto; min-width: 0;
+      display: flex; flex-direction: column; align-items: center;
     }
     .header-logo {
       flex: 0 0 auto;
@@ -45,8 +48,8 @@
       object-fit: contain;
       opacity: 0.5;
     }
-    .header-logo-left  { height: 72px; max-width: 220px; align-self: center; }
-    .header-logo-right { height: 88px; max-width: 260px; align-self: center; }
+    .header-logo-left  { height: 72px; max-width: 220px; }
+    .header-logo-right { height: 88px; max-width: 260px; }
     .assets-download-row {
       display: flex; justify-content: center;
       gap: 12px;
@@ -302,6 +305,29 @@
       text-align: center; padding: 24px; border: 1px dashed #1e1e1e; border-radius: 6px;
     }
 
+    /* ── LIGHTBOX ── click any .card img to zoom; click overlay or Esc to close */
+    .card img { cursor: zoom-in; }
+    .lightbox {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0, 0, 0, 0.92);
+      display: none;
+      align-items: center; justify-content: center;
+      padding: 24px; cursor: zoom-out;
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox img {
+      max-width: 100%; max-height: 100%;
+      object-fit: contain; cursor: zoom-out;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+    }
+    .lightbox-close {
+      position: absolute; top: 18px; right: 22px;
+      background: none; border: none; color: rgba(255, 255, 255, 0.6);
+      font-size: 32px; line-height: 1; cursor: pointer;
+      font-family: 'Roboto', -apple-system, sans-serif;
+    }
+    .lightbox-close:hover { color: white; }
+
     /* ── PRINT ── */
     @page { size: letter; margin: 0.4in; }
     @media print {
@@ -373,12 +399,14 @@
       .card-body { padding: 8px 0 4px; }
       .sub-label { margin: 10px 0 6px; font-size: 9px; padding-bottom: 4px; }
       .job-header { padding: 12px 18px 10px; }
-      .header-top { margin-bottom: 14px; }
+      .header-row { gap: 16px; }
       .header-site-name { font-size: 34px; }
       .header-doc-type { font-size: 14px; margin-bottom: 6px; }
       .header-logo-left  { height: 54px; max-width: 170px; }
       .header-logo-right { height: 66px; max-width: 190px; }
-      .header-download { display: none; }
+      .assets-download-row { display: none; }
+      .lightbox { display: none !important; }
+      .card img { cursor: default; }
 
       /* Image size caps — never stretch, letterbox instead */
       .img-grid img { max-height: 2.8in; max-width: 100%; object-fit: contain; margin: 0 auto; }
@@ -422,19 +450,22 @@
 <div class="page">
 
   <div class="job-header">
-    <div class="header-top">
+    <div class="header-row">
       <img class="header-logo header-logo-left" src="../../assets/BlinkEye.png" alt="Blink">
+      <div class="header-text">
+        <div class="header-meta-top">Blink 2026 &nbsp;·&nbsp; Site 3.8</div>
+        <div class="header-site-name">Covenant First Church</div>
+        <div class="header-doc-type">Projector Study</div>
+        <div class="header-meta-bottom"><span class="header-meta-text">04/23/2026</span></div>
+      </div>
       <img class="header-logo header-logo-right" src="../../assets/4Wall_Logo_White.png" alt="4Wall">
     </div>
-    <div class="header-meta-top">Blink 2026 &nbsp;·&nbsp; Site 3.8</div>
-    <div class="header-site-name">Covenant First Church</div>
-    <div class="header-doc-type">Projector Study</div>
-    <div class="header-meta-bottom"><span class="header-meta-text">04/23/2026</span></div>
   </div>
 
   
   <div class="assets-download-row">
-    <a class="header-download" href="../delivery/Covenant_First_Church/Covenant_First_Church_assets_v1.zip" download>Download Assets</a>
+    <a class="header-download" href="https://github.com/4WallVP/Blink2026-Public/releases/download/delivery-covenant-first-church-v1/Covenant_First_Church_assets_v1.zip" download>Download Assets</a>
+    <a class="header-download" href="https://www.notion.so/4wall-wiki/3-11-Covenant-First-Churc3-11-2a91a83808e7800ea7cbc4dbb359c30b?source=copy_link" target="_blank" rel="noopener">Notion</a>
   </div>
   
 
@@ -1029,5 +1060,39 @@
   
 
 </div>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+  <img id="lightbox-img" alt="">
+</div>
+
+<script>
+  (function () {
+    var lb = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lightbox-img');
+    if (!lb || !lbImg) return;
+
+    function open(src, alt) {
+      lbImg.src = src;
+      lbImg.alt = alt || '';
+      lb.classList.add('is-open');
+      lb.setAttribute('aria-hidden', 'false');
+    }
+    function close() {
+      lb.classList.remove('is-open');
+      lb.setAttribute('aria-hidden', 'true');
+      lbImg.src = '';
+    }
+
+    document.querySelectorAll('.card img').forEach(function (img) {
+      img.addEventListener('click', function () { open(img.currentSrc || img.src, img.alt); });
+    });
+    lb.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+    });
+  })();
+</script>
+
 </body>
 </html>
