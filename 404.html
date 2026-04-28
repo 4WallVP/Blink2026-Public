@@ -4,6 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Blink 2026</title>
+		<link rel="icon" type="image/png" href="assets/BlinkEye.png" />
 		<style>
 			:root {
 				color-scheme: dark;
@@ -173,16 +174,42 @@
 				gap: 18px;
 			}
 
+			.card-link-tile {
+				display: block;
+				color: inherit;
+				text-decoration: none;
+			}
+
 			.card {
 				display: flex;
 				flex-direction: column;
 				gap: 14px;
-				min-height: 220px;
+				min-height: 320px;
 				padding: 22px;
 				border-radius: 20px;
 				border: 1px solid var(--line);
 				background: linear-gradient(180deg, rgba(12, 30, 62, 0.95), rgba(8, 18, 36, 0.95));
 				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+				transition:
+					transform 160ms ease,
+					border-color 160ms ease,
+					box-shadow 160ms ease;
+			}
+
+			.card-link-tile:hover .card,
+			.card-link-tile:focus-visible .card {
+				transform: translateY(-3px);
+				border-color: rgba(152, 188, 255, 0.32);
+				box-shadow:
+					inset 0 1px 0 rgba(255, 255, 255, 0.03),
+					0 18px 34px rgba(0, 0, 0, 0.28);
+			}
+
+			.card-top {
+				display: flex;
+				align-items: flex-start;
+				justify-content: space-between;
+				gap: 14px;
 			}
 
 			.meta-row {
@@ -212,50 +239,45 @@
 				text-transform: uppercase;
 			}
 
-			.card-copy {
-				margin: 0;
-				color: var(--muted);
-				font-size: 0.97rem;
-				line-height: 1.55;
-			}
-
-			.card-footer {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				gap: 16px;
-				margin-top: auto;
-			}
-
 			.card-date {
 				color: var(--muted);
-				font-size: 0.86rem;
-				letter-spacing: 0.04em;
-			}
-
-			.download-btn {
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-				min-height: 42px;
-				padding: 0 16px;
-				border: none;
-				border-radius: 10px;
-				background: linear-gradient(180deg, var(--accent) 0%, var(--accent-strong) 100%);
-				color: white;
-				font-family: inherit;
-				font-size: 0.84rem;
-				font-weight: 700;
+				font-size: 0.8rem;
 				letter-spacing: 0.08em;
 				text-transform: uppercase;
-				text-decoration: none;
-				cursor: pointer;
-				box-shadow: 0 10px 24px rgba(20, 100, 220, 0.28);
+				white-space: nowrap;
 			}
 
-			.download-btn:disabled {
-				opacity: 0.7;
-				cursor: progress;
+			.card-preview {
+				position: relative;
+				margin-top: auto;
+				border-radius: 16px;
+				overflow: hidden;
+				aspect-ratio: 16 / 10;
+				background:
+					linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)),
+					radial-gradient(circle at top left, rgba(93, 168, 255, 0.12), transparent 40%),
+					#08101c;
+				border: 1px solid rgba(152, 188, 255, 0.14);
+			}
+
+			.card-preview img {
+				display: block;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			.card-preview-empty::before {
+				content: 'Preview unavailable';
+				position: absolute;
+				inset: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 0.78rem;
+				letter-spacing: 0.16em;
+				text-transform: uppercase;
+				color: rgba(255, 255, 255, 0.38);
 			}
 
 			.empty {
@@ -368,246 +390,266 @@
 					<img class="hero-logo hero-logo-right" src="assets/4Wall_Logo_White.png" alt="4Wall" />
 				</div>
 			</section>
-			<section class="grid">      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 1.1</span>
-                    <span class="meta-chip">v2</span>
-                  </div>
-                  <h2>Royal Dog Mural</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/25/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Royal_Dog_Mural_assets_v2.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Royal_Dog_Mural/Royal_Dog_Mural_left-clean_v2.png&quot;,&quot;name&quot;:&quot;Royal_Dog_Mural_left-clean_v2.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Royal_Dog_Mural/Royal_Dog_Mural_left-composite_v2.png&quot;,&quot;name&quot;:&quot;Royal_Dog_Mural_left-composite_v2.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Royal_Dog_Mural/Royal_Dog_Mural_left-grid_v2.png&quot;,&quot;name&quot;:&quot;Royal_Dog_Mural_left-grid_v2.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Royal_Dog_Mural/Royal_Dog_Mural_projectorstudy_v2.pdf&quot;,&quot;name&quot;:&quot;Royal_Dog_Mural_projectorstudy_v2.pdf&quot;},{&quot;url&quot;:&quot;exports/delivery/Royal_Dog_Mural/Royal_Dog_Mural_right-clean_v2.png&quot;,&quot;name&quot;:&quot;Royal_Dog_Mural_right-clean_v2.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Royal_Dog_Mural/Royal_Dog_Mural_right-composite_v2.png&quot;,&quot;name&quot;:&quot;Royal_Dog_Mural_right-composite_v2.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Royal_Dog_Mural/Royal_Dog_Mural_right-grid_v2.png&quot;,&quot;name&quot;:&quot;Royal_Dog_Mural_right-grid_v2.png&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 1.2</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Natalia Rak Mural</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/27/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Natalia_Rak_Mural_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Natalia_Rak_Mural/Natalia_Rak_Mural_clean_v1.png&quot;,&quot;name&quot;:&quot;Natalia_Rak_Mural_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Natalia_Rak_Mural/Natalia_Rak_Mural_composite_v1.png&quot;,&quot;name&quot;:&quot;Natalia_Rak_Mural_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Natalia_Rak_Mural/Natalia_Rak_Mural_grid_v1.png&quot;,&quot;name&quot;:&quot;Natalia_Rak_Mural_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Natalia_Rak_Mural/Natalia_Rak_Mural_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Natalia_Rak_Mural_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 1.3</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Payphone Mural</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/27/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Payphone_Mural_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Payphone_Mural/Payphone_Mural_clean_v1.png&quot;,&quot;name&quot;:&quot;Payphone_Mural_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Payphone_Mural/Payphone_Mural_composite_v1.png&quot;,&quot;name&quot;:&quot;Payphone_Mural_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Payphone_Mural/Payphone_Mural_grid_v1.png&quot;,&quot;name&quot;:&quot;Payphone_Mural_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Payphone_Mural/Payphone_Mural_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Payphone_Mural_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 2.3</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>American Building</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/25/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="American_Building_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/American_Building/American_Building_clean_v1.png&quot;,&quot;name&quot;:&quot;American_Building_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/American_Building/American_Building_composite_v1.png&quot;,&quot;name&quot;:&quot;American_Building_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/American_Building/American_Building_grid_v1.png&quot;,&quot;name&quot;:&quot;American_Building_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/American_Building/American_Building_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;American_Building_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 2.4</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>SCPA</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/25/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="SCPA_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/SCPA/SCPA_clean_v1.png&quot;,&quot;name&quot;:&quot;SCPA_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/SCPA/SCPA_composite_v1.png&quot;,&quot;name&quot;:&quot;SCPA_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/SCPA/SCPA_grid_v1.png&quot;,&quot;name&quot;:&quot;SCPA_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/SCPA/SCPA_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;SCPA_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 3.1</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Interactive Stage #1</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/24/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Interactive_Stage_1_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Interactive_Stage_1/Interactive_Stage_1_clean_v1.png&quot;,&quot;name&quot;:&quot;Interactive_Stage_1_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Interactive_Stage_1/Interactive_Stage_1_composite_v1.png&quot;,&quot;name&quot;:&quot;Interactive_Stage_1_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Interactive_Stage_1/Interactive_Stage_1_grid_v1.png&quot;,&quot;name&quot;:&quot;Interactive_Stage_1_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Interactive_Stage_1/Interactive_Stage_1_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Interactive_Stage_1_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 3.2</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Interactive Stage #2</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/24/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Interactive_Stage_2_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Interactive_Stage_2/Interactive_Stage_2_clean_v1.png&quot;,&quot;name&quot;:&quot;Interactive_Stage_2_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Interactive_Stage_2/Interactive_Stage_2_composite_v1.png&quot;,&quot;name&quot;:&quot;Interactive_Stage_2_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Interactive_Stage_2/Interactive_Stage_2_grid_v1.png&quot;,&quot;name&quot;:&quot;Interactive_Stage_2_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Interactive_Stage_2/Interactive_Stage_2_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Interactive_Stage_2_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 3.3</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Church Wall</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/23/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Church_Wall_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Church_Wall/Church_Wall_clean_v1.png&quot;,&quot;name&quot;:&quot;Church_Wall_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Church_Wall/Church_Wall_composite_v1.png&quot;,&quot;name&quot;:&quot;Church_Wall_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Church_Wall/Church_Wall_grid_v1.png&quot;,&quot;name&quot;:&quot;Church_Wall_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Church_Wall/Church_Wall_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Church_Wall_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 3.4</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>YWCA</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/24/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="YWCA_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/YWCA/YWCA_clean_v1.png&quot;,&quot;name&quot;:&quot;YWCA_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/YWCA/YWCA_composite_v1.png&quot;,&quot;name&quot;:&quot;YWCA_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/YWCA/YWCA_grid_v1.png&quot;,&quot;name&quot;:&quot;YWCA_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/YWCA/YWCA_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;YWCA_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 3.5</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Birds Mural</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/27/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Birds_Mural_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Birds_Mural/Birds_Mural_clean_v1.png&quot;,&quot;name&quot;:&quot;Birds_Mural_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Birds_Mural/Birds_Mural_composite_v1.png&quot;,&quot;name&quot;:&quot;Birds_Mural_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Birds_Mural/Birds_Mural_grid_v1.png&quot;,&quot;name&quot;:&quot;Birds_Mural_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Birds_Mural/Birds_Mural_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Birds_Mural_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 3.7</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Neil Armstrong Mural</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/23/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Neil_Armstrong_Mural_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Neil_Armstrong_Mural/Neil_Armstrong_Mural_clean_v1.png&quot;,&quot;name&quot;:&quot;Neil_Armstrong_Mural_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Neil_Armstrong_Mural/Neil_Armstrong_Mural_composite_v1.png&quot;,&quot;name&quot;:&quot;Neil_Armstrong_Mural_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Neil_Armstrong_Mural/Neil_Armstrong_Mural_grid_v1.png&quot;,&quot;name&quot;:&quot;Neil_Armstrong_Mural_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Neil_Armstrong_Mural/Neil_Armstrong_Mural_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Neil_Armstrong_Mural_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 3.8</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Covenant First Church</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/23/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Covenant_First_Church_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Covenant_First_Church/Covenant_First_Church_clean_v1.png&quot;,&quot;name&quot;:&quot;Covenant_First_Church_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Covenant_First_Church/Covenant_First_Church_composite_v1.png&quot;,&quot;name&quot;:&quot;Covenant_First_Church_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Covenant_First_Church/Covenant_First_Church_grid_v1.png&quot;,&quot;name&quot;:&quot;Covenant_First_Church_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Covenant_First_Church/Covenant_First_Church_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Covenant_First_Church_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 3.11</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Vince Fraser</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/27/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Vince_Fraser_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Vince_Fraser/Vince_Fraser_clean_v1.png&quot;,&quot;name&quot;:&quot;Vince_Fraser_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Vince_Fraser/Vince_Fraser_composite_v1.png&quot;,&quot;name&quot;:&quot;Vince_Fraser_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Vince_Fraser/Vince_Fraser_grid_v1.png&quot;,&quot;name&quot;:&quot;Vince_Fraser_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Vince_Fraser/Vince_Fraser_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Vince_Fraser_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 3.12</span>
-                    <span class="meta-chip">v2</span>
-                  </div>
-                  <h2>Aronoff</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/27/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Aronoff_assets_v2.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Aronoff/Aronoff_banner-clean_v2.png&quot;,&quot;name&quot;:&quot;Aronoff_banner-clean_v2.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Aronoff/Aronoff_banner-composite_v2.png&quot;,&quot;name&quot;:&quot;Aronoff_banner-composite_v2.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Aronoff/Aronoff_banner-grid_v2.png&quot;,&quot;name&quot;:&quot;Aronoff_banner-grid_v2.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Aronoff/Aronoff_clean_v2.png&quot;,&quot;name&quot;:&quot;Aronoff_clean_v2.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Aronoff/Aronoff_composite_v2.png&quot;,&quot;name&quot;:&quot;Aronoff_composite_v2.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Aronoff/Aronoff_grid_v2.png&quot;,&quot;name&quot;:&quot;Aronoff_grid_v2.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Aronoff/Aronoff_projectorstudy_v2.pdf&quot;,&quot;name&quot;:&quot;Aronoff_projectorstudy_v2.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 5.1</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Mother Of God</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/27/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Mother_Of_God_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Mother_Of_God/Mother_Of_God_clean_v1.png&quot;,&quot;name&quot;:&quot;Mother_Of_God_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Mother_Of_God/Mother_Of_God_composite_v1.png&quot;,&quot;name&quot;:&quot;Mother_Of_God_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Mother_Of_God/Mother_Of_God_grid_v1.png&quot;,&quot;name&quot;:&quot;Mother_Of_God_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Mother_Of_God/Mother_Of_God_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Mother_Of_God_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 5.2</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Hannaford</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/24/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Hannaford_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Hannaford/Hannaford_clean_v1.png&quot;,&quot;name&quot;:&quot;Hannaford_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Hannaford/Hannaford_composite_v1.png&quot;,&quot;name&quot;:&quot;Hannaford_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Hannaford/Hannaford_grid_v1.png&quot;,&quot;name&quot;:&quot;Hannaford_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Hannaford/Hannaford_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Hannaford_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 5.3</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Hotel Covington</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/24/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Hotel_Covington_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Hotel_Covington/Hotel_Covington_clean_v1.png&quot;,&quot;name&quot;:&quot;Hotel_Covington_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Hotel_Covington/Hotel_Covington_composite_v1.png&quot;,&quot;name&quot;:&quot;Hotel_Covington_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Hotel_Covington/Hotel_Covington_grid_v1.png&quot;,&quot;name&quot;:&quot;Hotel_Covington_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Hotel_Covington/Hotel_Covington_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Hotel_Covington_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 5.4</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Madison Theater</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/27/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Madison_Theater_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Madison_Theater/Madison_Theater_clean_v1.png&quot;,&quot;name&quot;:&quot;Madison_Theater_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Madison_Theater/Madison_Theater_composite_v1.png&quot;,&quot;name&quot;:&quot;Madison_Theater_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Madison_Theater/Madison_Theater_grid_v1.png&quot;,&quot;name&quot;:&quot;Madison_Theater_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Madison_Theater/Madison_Theater_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Madison_Theater_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 5.5</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Haile Foundation</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/27/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Haile_Foundation_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Haile_Foundation/Haile_Foundation_clean_v1.png&quot;,&quot;name&quot;:&quot;Haile_Foundation_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Haile_Foundation/Haile_Foundation_composite_v1.png&quot;,&quot;name&quot;:&quot;Haile_Foundation_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Haile_Foundation/Haile_Foundation_grid_v1.png&quot;,&quot;name&quot;:&quot;Haile_Foundation_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Haile_Foundation/Haile_Foundation_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Haile_Foundation_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article>
-      <article class="card">
-                  <div class="meta-row">
-                    <span class="meta-chip">Site 5.7</span>
-                    <span class="meta-chip">v1</span>
-                  </div>
-                  <h2>Micro Building</h2>
-                  <p class="card-copy">Study PDF and delivery exports, bundled in your browser at download time.</p>
-                  <div class="card-footer">
-                    <span class="card-date">04/27/2026</span>
-                    <button class="download-btn js-download-assets" type="button" data-download-name="Micro_Building_assets_v1.zip" data-files='[{&quot;url&quot;:&quot;exports/delivery/Micro_Building/Micro_Building_clean_v1.png&quot;,&quot;name&quot;:&quot;Micro_Building_clean_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Micro_Building/Micro_Building_composite_v1.png&quot;,&quot;name&quot;:&quot;Micro_Building_composite_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Micro_Building/Micro_Building_grid_v1.png&quot;,&quot;name&quot;:&quot;Micro_Building_grid_v1.png&quot;},{&quot;url&quot;:&quot;exports/delivery/Micro_Building/Micro_Building_projectorstudy_v1.pdf&quot;,&quot;name&quot;:&quot;Micro_Building_projectorstudy_v1.pdf&quot;}]'>Download Assets</button>
-                  </div>
-                </article></section>
+			<section class="grid">      <a class="card-link-tile" href="exports/html/royal-dog-mural.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 1.1</span>
+                        <span class="meta-chip">v2</span>
+                      </div>
+                      <span class="card-date">04/25/2026</span>
+                    </div>
+                    <h2>Royal Dog Mural</h2>
+                    <div class="card-preview"><img src="previews/royal-dog-mural.png" alt="Royal Dog Mural preview"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/natalia-rak-mural.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 1.2</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/27/2026</span>
+                    </div>
+                    <h2>Natalia Rak Mural</h2>
+                    <div class="card-preview"><img src="previews/natalia-rak-mural.jpg" alt="Natalia Rak Mural preview"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/payphone-mural.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 1.3</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/27/2026</span>
+                    </div>
+                    <h2>Payphone Mural</h2>
+                    <div class="card-preview"><img src="previews/payphone-mural.jpg" alt="Payphone Mural preview"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/american-building.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 2.3</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/25/2026</span>
+                    </div>
+                    <h2>American Building</h2>
+                    <div class="card-preview"><img src="previews/american-building.jpg" alt="American Building preview"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/scpa.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 2.4</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/25/2026</span>
+                    </div>
+                    <h2>SCPA</h2>
+                    <div class="card-preview"><img src="previews/scpa.png" alt="SCPA preview"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/interactive-stage-1.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 3.1</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/24/2026</span>
+                    </div>
+                    <h2>Interactive Stage #1</h2>
+                    <div class="card-preview"><img src="previews/interactive-stage-1.jpg" alt="Interactive Stage #1 preview"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/interactive-stage-2.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 3.2</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/24/2026</span>
+                    </div>
+                    <h2>Interactive Stage #2</h2>
+                    <div class="card-preview"><img src="previews/interactive-stage-2.jpg" alt="Interactive Stage #2 preview"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/church-wall.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 3.3</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/23/2026</span>
+                    </div>
+                    <h2>Church Wall</h2>
+                    <div class="card-preview"><img src="previews/church-wall.png" alt="Church Wall preview"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/ywca.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 3.4</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/24/2026</span>
+                    </div>
+                    <h2>YWCA</h2>
+                    <div class="card-preview"><img src="previews/ywca.png" alt="YWCA preview"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/birds-mural.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 3.5</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/27/2026</span>
+                    </div>
+                    <h2>Birds Mural</h2>
+                    <div class="card-preview"><img src="previews/birds-mural.png" alt="Birds Mural preview"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/neil-armstrong.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 3.7</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/23/2026</span>
+                    </div>
+                    <h2>Neil Armstrong Mural</h2>
+                    <div class="card-preview card-preview-empty"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/covenant-first-church.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 3.8</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/23/2026</span>
+                    </div>
+                    <h2>Covenant First Church</h2>
+                    <div class="card-preview"><img src="previews/covenant-first-church.jpg" alt="Covenant First Church preview"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/vince-fraser.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 3.11</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/27/2026</span>
+                    </div>
+                    <h2>Vince Fraser</h2>
+                    <div class="card-preview"><img src="previews/vince-fraser.png" alt="Vince Fraser preview"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/aronoff.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 3.12</span>
+                        <span class="meta-chip">v2</span>
+                      </div>
+                      <span class="card-date">04/27/2026</span>
+                    </div>
+                    <h2>Aronoff</h2>
+                    <div class="card-preview"><img src="previews/aronoff.png" alt="Aronoff preview"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/mother-of-god.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 5.1</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/27/2026</span>
+                    </div>
+                    <h2>Mother Of God</h2>
+                    <div class="card-preview card-preview-empty"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/hannaford.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 5.2</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/24/2026</span>
+                    </div>
+                    <h2>Hannaford</h2>
+                    <div class="card-preview card-preview-empty"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/hotel-covington.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 5.3</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/24/2026</span>
+                    </div>
+                    <h2>Hotel Covington</h2>
+                    <div class="card-preview card-preview-empty"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/madison-theater.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 5.4</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/27/2026</span>
+                    </div>
+                    <h2>Madison Theater</h2>
+                    <div class="card-preview card-preview-empty"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/haile-foundation.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 5.5</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/27/2026</span>
+                    </div>
+                    <h2>Haile Foundation</h2>
+                    <div class="card-preview card-preview-empty"></div>
+                  </article>
+                </a>
+      <a class="card-link-tile" href="exports/html/micro-building.html">
+                  <article class="card">
+                    <div class="card-top">
+                      <div class="meta-row">
+                        <span class="meta-chip">Site 5.7</span>
+                        <span class="meta-chip">v1</span>
+                      </div>
+                      <span class="card-date">04/27/2026</span>
+                    </div>
+                    <h2>Micro Building</h2>
+                    <div class="card-preview card-preview-empty"></div>
+                  </article>
+                </a></section>
 		</main>
 		<script>
 			(function () {
@@ -677,168 +719,6 @@
 						update(false);
 					}, 1000);
 				}
-			})();
-
-			(function () {
-				var buttons = document.querySelectorAll('.js-download-assets');
-				if (!buttons.length) return;
-
-				var encoder = new TextEncoder();
-				var crcTable = new Uint32Array(256);
-				for (var n = 0; n < 256; n += 1) {
-					var c = n;
-					for (var k = 0; k < 8; k += 1) {
-						c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
-					}
-					crcTable[n] = c >>> 0;
-				}
-
-				function crc32(bytes) {
-					var crc = 0xffffffff;
-					for (var i = 0; i < bytes.length; i += 1) {
-						crc = crcTable[(crc ^ bytes[i]) & 0xff] ^ (crc >>> 8);
-					}
-					return (crc ^ 0xffffffff) >>> 0;
-				}
-
-				function dosTimePart(date) {
-					return ((date.getHours() & 31) << 11) | ((date.getMinutes() & 63) << 5) | ((Math.floor(date.getSeconds() / 2)) & 31);
-				}
-
-				function dosDatePart(date) {
-					return (((date.getFullYear() - 1980) & 127) << 9) | (((date.getMonth() + 1) & 15) << 5) | (date.getDate() & 31);
-				}
-
-				function makeRecord(size, writer) {
-					var bytes = new Uint8Array(size);
-					var view = new DataView(bytes.buffer);
-					writer(view, bytes);
-					return bytes;
-				}
-
-				function localHeader(nameBytes, crc, size, time, date) {
-					return makeRecord(30 + nameBytes.length, function (view, bytes) {
-						view.setUint32(0, 0x04034b50, true);
-						view.setUint16(4, 20, true);
-						view.setUint16(6, 0, true);
-						view.setUint16(8, 0, true);
-						view.setUint16(10, time, true);
-						view.setUint16(12, date, true);
-						view.setUint32(14, crc, true);
-						view.setUint32(18, size, true);
-						view.setUint32(22, size, true);
-						view.setUint16(26, nameBytes.length, true);
-						view.setUint16(28, 0, true);
-						bytes.set(nameBytes, 30);
-					});
-				}
-
-				function centralHeader(nameBytes, crc, size, time, date, offset) {
-					return makeRecord(46 + nameBytes.length, function (view, bytes) {
-						view.setUint32(0, 0x02014b50, true);
-						view.setUint16(4, 20, true);
-						view.setUint16(6, 20, true);
-						view.setUint16(8, 0, true);
-						view.setUint16(10, 0, true);
-						view.setUint16(12, time, true);
-						view.setUint16(14, date, true);
-						view.setUint32(16, crc, true);
-						view.setUint32(20, size, true);
-						view.setUint32(24, size, true);
-						view.setUint16(28, nameBytes.length, true);
-						view.setUint16(30, 0, true);
-						view.setUint16(32, 0, true);
-						view.setUint16(34, 0, true);
-						view.setUint16(36, 0, true);
-						view.setUint32(38, 0, true);
-						view.setUint32(42, offset, true);
-						bytes.set(nameBytes, 46);
-					});
-				}
-
-				function endRecord(count, centralSize, centralOffset) {
-					return makeRecord(22, function (view) {
-						view.setUint32(0, 0x06054b50, true);
-						view.setUint16(4, 0, true);
-						view.setUint16(6, 0, true);
-						view.setUint16(8, count, true);
-						view.setUint16(10, count, true);
-						view.setUint32(12, centralSize, true);
-						view.setUint32(16, centralOffset, true);
-						view.setUint16(20, 0, true);
-					});
-				}
-
-				function saveBlob(blob, filename) {
-					var url = URL.createObjectURL(blob);
-					var link = document.createElement('a');
-					link.href = url;
-					link.download = filename;
-					document.body.appendChild(link);
-					link.click();
-					link.remove();
-					setTimeout(function () {
-						URL.revokeObjectURL(url);
-					}, 1000);
-				}
-
-				async function downloadAssets(button) {
-					var filename = button.getAttribute('data-download-name') || 'assets.zip';
-					var files = JSON.parse(button.getAttribute('data-files') || '[]');
-					if (!files.length) return;
-
-					var previous = button.textContent;
-					button.disabled = true;
-					button.textContent = 'Preparing...';
-
-					try {
-						var now = new Date();
-						var time = dosTimePart(now);
-						var date = dosDatePart(now);
-						var localParts = [];
-						var centralParts = [];
-						var offset = 0;
-
-						for (var i = 0; i < files.length; i += 1) {
-							var file = files[i];
-							var response = await fetch(file.url);
-							if (!response.ok) {
-								throw new Error('Failed to fetch ' + file.url + ' (' + response.status + ')');
-							}
-							var buffer = await response.arrayBuffer();
-							var data = new Uint8Array(buffer);
-							var nameBytes = encoder.encode(file.name);
-							var crc = crc32(data);
-							var header = localHeader(nameBytes, crc, data.length, time, date);
-							localParts.push(header, data);
-							centralParts.push(centralHeader(nameBytes, crc, data.length, time, date, offset));
-							offset += header.length + data.length;
-						}
-
-						var centralOffset = offset;
-						var centralSize = 0;
-						for (var j = 0; j < centralParts.length; j += 1) {
-							centralSize += centralParts[j].length;
-						}
-
-						var zipBlob = new Blob(localParts.concat(centralParts, [endRecord(files.length, centralSize, centralOffset)]), {
-							type: 'application/zip',
-						});
-						saveBlob(zipBlob, filename);
-					} catch (error) {
-						console.error(error);
-						window.alert('Failed to prepare the asset download.');
-					} finally {
-						button.disabled = false;
-						button.textContent = previous;
-					}
-				}
-
-				buttons.forEach(function (button) {
-					button.addEventListener('click', function () {
-						downloadAssets(button);
-					});
-				});
 			})();
 		</script>
 	</body>

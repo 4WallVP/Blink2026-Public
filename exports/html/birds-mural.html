@@ -26,20 +26,49 @@
     table { page-break-inside: auto; }
     thead { display: table-header-group; }
     tr { page-break-inside: avoid; break-inside: avoid; }
-
     /* ── HEADER ── */
     .job-header {
       background: linear-gradient(160deg, #004fa3 0%, #003070 45%, #001840 100%);
-      border-radius: 10px; padding: 18px 84px 16px;
+      border-radius: 10px; padding: 18px 28px 16px;
       text-align: center; position: relative; overflow: hidden;
     }
-    .header-logo {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      height: 62px; width: auto; max-width: 216px;
-      object-fit: contain; object-position: center; opacity: 0.5;
+    .header-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
     }
-    .header-logo-left  { left: 20px; height: 107px; max-width: 373px; object-position: left center; }
-    .header-logo-right { right: 20px; height: 129px; max-width: 450px; object-position: right center; }
+    .header-logo {
+      flex: 0 0 auto;
+      width: auto;
+      object-fit: contain;
+      opacity: 0.5;
+    }
+    .header-logo-left  { height: 72px; max-width: 220px; align-self: center; }
+    .header-logo-right { height: 88px; max-width: 260px; align-self: center; }
+    .assets-download-row {
+      display: flex; justify-content: center;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .header-download {
+      background: #005eb8;
+      color: #fff;
+      border: none;
+      padding: 8px 22px;
+      border-radius: 6px;
+      font-family: 'Roboto', -apple-system, sans-serif;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 1);
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+    .header-download:hover { background: #004494; }
     .header-meta-top {
       font-family: 'Roboto Mono', monospace; font-size: 11px;
       letter-spacing: 2px; color: rgba(255,255,255,0.4);
@@ -343,12 +372,13 @@
       .card-title { font-size: 16px; letter-spacing: 3px; }
       .card-body { padding: 8px 0 4px; }
       .sub-label { margin: 10px 0 6px; font-size: 9px; padding-bottom: 4px; }
-      .job-header { padding: 12px 72px 10px; }
+      .job-header { padding: 12px 18px 10px; }
+      .header-top { margin-bottom: 14px; }
       .header-site-name { font-size: 34px; }
       .header-doc-type { font-size: 14px; margin-bottom: 6px; }
-      .header-logo { height: 50px; max-width: 180px; }
-      .header-logo-left  { left: 14px; height: 86px; max-width: 311px; }
-      .header-logo-right { right: 14px; height: 104px; max-width: 374px; }
+      .header-logo-left  { height: 54px; max-width: 170px; }
+      .header-logo-right { height: 66px; max-width: 190px; }
+      .header-download { display: none; }
 
       /* Image size caps — never stretch, letterbox instead */
       .img-grid img { max-height: 2.8in; max-width: 100%; object-fit: contain; margin: 0 auto; }
@@ -392,13 +422,21 @@
 <div class="page">
 
   <div class="job-header">
-    <img class="header-logo header-logo-left" src="../../assets/BlinkEye.png" alt="Blink">
-    <img class="header-logo header-logo-right" src="../../assets/4Wall_Logo_White.png" alt="4Wall">
+    <div class="header-top">
+      <img class="header-logo header-logo-left" src="../../assets/BlinkEye.png" alt="Blink">
+      <img class="header-logo header-logo-right" src="../../assets/4Wall_Logo_White.png" alt="4Wall">
+    </div>
     <div class="header-meta-top">Blink 2026 &nbsp;·&nbsp; Site 3.5</div>
     <div class="header-site-name">Birds Mural</div>
     <div class="header-doc-type">Projector Study</div>
     <div class="header-meta-bottom"><span class="header-meta-text">04/27/2026</span></div>
   </div>
+
+  
+  <div class="assets-download-row">
+    <a class="header-download" href="../delivery/Birds_Mural/Birds_Mural_assets_v1.zip" download>Download Assets</a>
+  </div>
+  
 
   <div class="card">
     <div class="card-header">
@@ -407,7 +445,9 @@
     <div class="card-body">
       
       <div class="img-grid img-grid-1" style="margin-bottom:18px;">
-        <img class="layout-img" src="../_thumbs/birds-mural/layout.jpg" alt="Site Layout">
+        <div class="img-item">
+          <img class="layout-img" src="../_thumbs/birds-mural/layout.jpg" alt="Site Layout">
+        </div>
       </div>
       
 
@@ -496,9 +536,21 @@
       
       <div class="sub-label">Delivery</div>
       <div class="img-grid img-grid-3">
-        <img src="../_thumbs/birds-mural/clean.jpg" alt="Clean">
-        <img src="../_thumbs/birds-mural/grid.jpg" alt="Grid">
-        <img src="../_thumbs/birds-mural/composite.jpg" alt="Composite">
+        
+        <div class="img-item">
+          <img src="../_thumbs/birds-mural/clean.jpg" alt="Clean">
+        </div>
+        
+        
+        <div class="img-item">
+          <img src="../_thumbs/birds-mural/grid.jpg" alt="Grid">
+        </div>
+        
+        
+        <div class="img-item">
+          <img src="../_thumbs/birds-mural/composite.jpg" alt="Composite">
+        </div>
+        
       </div>
       
 
@@ -824,7 +876,7 @@
   
   <div class="card">
     <div class="card-header"><span class="card-title">Notes</span></div>
-    <div class="card-body"><pre style='white-space:pre-wrap;color:#000;font-size:13px;margin:0;font-family:inherit;'>- Includes a 5% &quot;Bleed&quot; on all sides to ensure full coverage of the building surfaces. Please fill content to the full bleed dimensions to avoid any gaps in coverage.
+    <div class="card-body"><pre style='white-space:pre-wrap;color:#fff;font-size:13px;margin:0;font-family:inherit;'>- Includes a 5% &quot;Bleed&quot; on all sides to ensure full coverage of the building surfaces. Please fill content to the full bleed dimensions to avoid any gaps in coverage.
 - Projectors are angled outwards to walls edges.</pre></div>
   </div>
   
