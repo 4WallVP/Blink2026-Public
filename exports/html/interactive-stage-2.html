@@ -328,9 +328,19 @@
     }
     .lightbox-close:hover { color: white; }
 
+    /* ── NOTES (markdown rendered into card body) ── */
+    .notes-pre {
+      white-space: pre-wrap;
+      color: #fff;
+      font-size: 13px;
+      margin: 0;
+      font-family: inherit;
+    }
+
     /* ── PRINT ── */
     @page { size: letter; margin: 0.4in; }
     @media print {
+      .notes-pre { color: #111; }
       html, body { background: white !important; padding: 0; margin: 0; color: #111; }
       .page { border: none; border-radius: 0; background: white !important; width: 100%; padding: 0; margin: 0; overflow: visible; }
       .job-header, .equip-chip, .pj-header, thead th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -604,7 +614,7 @@
       <div class="pj-row"><span class="pj-row-label">Lens to Ground</span><span class="pj-row-val mono">18&#39;-0&#34;</span></div>
       <div class="pj-row"><span class="pj-row-label">Throw Distance</span><span class="pj-row-val mono">126&#39;-0&#34;</span></div>
       <div class="pj-row"><span class="pj-row-label">Angle</span><span class="pj-row-val mono">6°</span></div>
-      <div class="pj-row"><span class="pj-row-label">Focus</span><span class="pj-row-val">Whole Wall</span></div>
+      <div class="pj-row"><span class="pj-row-label">Focus</span><span class="pj-row-val">Left Side</span></div>
     </div>
     <div class="pj-col">
       <div class="pj-col-title">Optics</div>
@@ -612,10 +622,10 @@
       <div class="shift-row">
         <div class="shift-top">
           <span class="shift-label">Est. Throw Ratio</span>
-          <span class="shift-value">1.38 : 1</span>
+          <span class="shift-value">2.15 : 1</span>
         </div>
         <div class="shift-track" style="--p1:10%; --p2:25%; --p3:75%; --p4:90%;">
-          <div class="shift-marker" style="left:0.0%;"></div>
+          <div class="shift-marker" style="left:64.9%;"></div>
         </div>
         <div class="shift-scale">
           <span class="shift-scale-lo">1.67</span>
@@ -680,7 +690,7 @@
       <div class="pj-row"><span class="pj-row-label">Lens to Ground</span><span class="pj-row-val mono">18&#39;-0&#34;</span></div>
       <div class="pj-row"><span class="pj-row-label">Throw Distance</span><span class="pj-row-val mono">126&#39;-0&#34;</span></div>
       <div class="pj-row"><span class="pj-row-label">Angle</span><span class="pj-row-val mono">6°</span></div>
-      <div class="pj-row"><span class="pj-row-label">Focus</span><span class="pj-row-val">Whole Wall</span></div>
+      <div class="pj-row"><span class="pj-row-label">Focus</span><span class="pj-row-val">Center</span></div>
     </div>
     <div class="pj-col">
       <div class="pj-col-title">Optics</div>
@@ -688,10 +698,10 @@
       <div class="shift-row">
         <div class="shift-top">
           <span class="shift-label">Est. Throw Ratio</span>
-          <span class="shift-value">1.38 : 1</span>
+          <span class="shift-value">2.15 : 1</span>
         </div>
         <div class="shift-track" style="--p1:10%; --p2:25%; --p3:75%; --p4:90%;">
-          <div class="shift-marker" style="left:0.0%;"></div>
+          <div class="shift-marker" style="left:64.9%;"></div>
         </div>
         <div class="shift-scale">
           <span class="shift-scale-lo">1.67</span>
@@ -756,7 +766,7 @@
       <div class="pj-row"><span class="pj-row-label">Lens to Ground</span><span class="pj-row-val mono">18&#39;-0&#34;</span></div>
       <div class="pj-row"><span class="pj-row-label">Throw Distance</span><span class="pj-row-val mono">126&#39;-0&#34;</span></div>
       <div class="pj-row"><span class="pj-row-label">Angle</span><span class="pj-row-val mono">6°</span></div>
-      <div class="pj-row"><span class="pj-row-label">Focus</span><span class="pj-row-val">Whole Wall</span></div>
+      <div class="pj-row"><span class="pj-row-label">Focus</span><span class="pj-row-val">Right Side</span></div>
     </div>
     <div class="pj-col">
       <div class="pj-col-title">Optics</div>
@@ -764,10 +774,10 @@
       <div class="shift-row">
         <div class="shift-top">
           <span class="shift-label">Est. Throw Ratio</span>
-          <span class="shift-value">1.38 : 1</span>
+          <span class="shift-value">2.15 : 1</span>
         </div>
         <div class="shift-track" style="--p1:10%; --p2:25%; --p3:75%; --p4:90%;">
-          <div class="shift-marker" style="left:0.0%;"></div>
+          <div class="shift-marker" style="left:64.9%;"></div>
         </div>
         <div class="shift-scale">
           <span class="shift-scale-lo">1.67</span>
@@ -831,7 +841,7 @@
   
   <div class="card">
     <div class="card-header"><span class="card-title">Notes</span></div>
-    <div class="card-body"><pre style='white-space:pre-wrap;color:#fff;font-size:13px;margin:0;font-family:inherit;'>- Includes a 5% &quot;Bleed&quot; on all sides to ensure full coverage of the building surfaces. Please fill content to the full bleed dimensions to avoid any gaps in coverage.</pre></div>
+    <div class="card-body"><pre class="notes-pre">- Includes a 5% &quot;Bleed&quot; on all sides to ensure full coverage of the building surfaces. Please fill content to the full bleed dimensions to avoid any gaps in coverage.</pre></div>
   </div>
   
 

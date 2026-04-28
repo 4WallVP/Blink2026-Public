@@ -328,9 +328,19 @@
     }
     .lightbox-close:hover { color: white; }
 
+    /* ── NOTES (markdown rendered into card body) ── */
+    .notes-pre {
+      white-space: pre-wrap;
+      color: #fff;
+      font-size: 13px;
+      margin: 0;
+      font-family: inherit;
+    }
+
     /* ── PRINT ── */
     @page { size: letter; margin: 0.4in; }
     @media print {
+      .notes-pre { color: #111; }
       html, body { background: white !important; padding: 0; margin: 0; color: #111; }
       .page { border: none; border-radius: 0; background: white !important; width: 100%; padding: 0; margin: 0; overflow: visible; }
       .job-header, .equip-chip, .pj-header, thead th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -962,7 +972,7 @@
   
   <div class="card">
     <div class="card-header"><span class="card-title">Notes</span></div>
-    <div class="card-body"><pre style='white-space:pre-wrap;color:#fff;font-size:13px;margin:0;font-family:inherit;'>- Includes a 5% &quot;Bleed&quot; on all sides to ensure full coverage of the building surfaces. Please fill content to the full bleed dimensions to avoid any gaps in coverage.</pre></div>
+    <div class="card-body"><pre class="notes-pre">- Includes a 5% &quot;Bleed&quot; on all sides to ensure full coverage of the building surfaces. Please fill content to the full bleed dimensions to avoid any gaps in coverage.</pre></div>
   </div>
   
 
